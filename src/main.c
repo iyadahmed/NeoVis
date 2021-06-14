@@ -1,62 +1,92 @@
 #include <errno.h>
+#include <magic.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <turbojpeg.h>
 
-#ifdef _WIN32
-#define strcasecmp stricmp
-#define strncasecmp strnicmp
-#endif
+#define NA 0
+#define JPG 1
 
-// read an image to an uncompressed buffer
-int read_image(unsigned char *imBuf, char *imPath) {
-  FILE *jpegFile = NULL;
-  unsigned char *imgBuf = NULL, *jpegBuf = NULL;
-  tjhandle tjInstance = NULL;
-  char *inFormat = strrchr(imPath, '.');
-  if (inFormat == NULL) {
-    fprintf(stderr, "Invalid image file extension");
-    return -1;
-  }
-  // TODO: do common operations first
-  // e.g file opening/size-determination
-  // we need then to ensure valid extension before
-  // TODO: split per extension read into functions
-  if (!strcasecmp(inFormat, "jpg")) {
-    long size;
-    int inSubsamp, inColorspace;
-    unsigned long jpegSize;
-    if ((jpegFile = fopen(imPath, "rb")) == NULL) {
-      fprintf(stderr, "Error opening image file");
-      return -1;
-    }
-    if (fseek(jpegFile, 0, SEEK_END) < 0 || ((size = ftell(jpegFile)) < 0) ||
-        fseek(jpegFile, 0, SEEK_SET) < 0) {
-      fprintf(stderr, "Failed to determine image file size");
-      return -1;
-    }
-    if (size == 0) {
-      fprintf(stderr, "Image file contains no data");
-      return -1;
-    }
-    jpegSize = (unsigned long)size;
-    if ((jpegBuf = (unsigned char *)tjAlloc(jpegSize)) == NULL) {
-      fprintf(stderr, "Error allocating JPEG buffer");
-      return -1;
-    }
-    if (fread(jpegBuf, jpegSize, 1, jpegFile) < 1) {
-      fprintf(stderr, "Error reading JPEG file");
-      return -1;
-    }
-    fclose(jpegFile);
-    jpegFile = NULL;
-    if ((tjInstance = tjInitDecompress()) == NULL) {
-      fprintf(stderr, "Error initializing JPEG decompressor");
-      return -1;
+typedef struct FORMAT {
+  unsigned int id;
+  char *signture;
+} FORMAT;
+
+FORMAT SUPPORTED_FORAMTS[] = {
+    {.id = JPG, .signture = "\xff\xd8\xff"},
+};
+
+unsigned int find_file_signture_id(char *filePath) {
+  size_t i, signture_len, max_signture_len = 0;
+  unsigned int NUM_SUPPORTED_FORMATS =
+      sizeof(SUPPORTED_FORAMTS) / sizeof(FORMAT);
+
+  for (i = 0; i < NUM_SUPPORTED_FORMATS; i++) {
+    size_t len = strlen(SUPPORTED_FORAMTS[i].signture);
+    if (len > max_signture_len) {
+      max_signture_len = len;
     }
   }
-  return 1;
+
+  // TODO: open file only once for both signature check and image reading
+  FILE *file = fopen(filePath, "rb");
+  if (!file) {
+    return NA;
+  }
+
+  char *signture = (char *)malloc(max_signture_len);
+  memset(signture, 0, max_signture_len);
+  signture_len = fread(signture, 1, max_signture_len, file);
+  fclose(file);
+
+  for (i = 0; i < NUM_SUPPORTED_FORMATS; i++) {
+    if (memcmp(signture, SUPPORTED_FORAMTS[i].signture, signture_len) == 0) {
+      return SUPPORTED_FORAMTS[i].id;
+    }
+  }
+  return NA;
 }
 
-int main(int argc, char *argv[]) { return 0; }
+// Read an image into an uncompressed buffer
+// MUST be freed
+unsigned char *read_image(char *imPath) {
+  unsigned char *imBuf = NULL;
+
+  unsigned int signture_id = find_file_signture_id(imPath);
+  switch (signture_id) {
+  case JPG:
+    imBuf = read_jpg(imPath);
+    break;
+
+  default:
+    fprintf(stderr, "Unsupported file format.\n");
+    return NULL;
+  }
+  return imBuf;
+}
+
+unsigned char *read_jpg(char *imPath) {
+  tjscalingfactor scalingFactor = {1, 1};
+  int outSubsamp = -1, outQual = -1;
+  tjtransform xform;
+  int flags = 0;
+  int width, height;
+  char *inFormat, *outFormat;
+  FILE *jpegFile = NULL;
+  unsigned char *imgBuf = NULL, *jpegBuf = NULL;
+  int retval = 0, i, pixelFormat = TJPF_UNKNOWN;
+  tjhandle tjInstance = NULL;
+
+  // TODO: complete jpeg
+  return NULL;
+}
+
+int main(int argc, char *argv[]) {
+  if (argc < 2) {
+    printf("Usage: neovis /path/to/image");
+    return 1;
+  }
+  printf("%d\n", find_file_signture_id(argv[1]));
+  return 0;
+}
