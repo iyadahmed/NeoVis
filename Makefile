@@ -2,9 +2,11 @@ CC=gcc
 CFLAGS=-Wall -Wextra -Wpedantic
 LDFLAGS=-static -pthread -lturbojpeg
 
-OBJECTS=src/main.c
+.PHONY: clean
+neovis:
+	@mkdir -p build
+	@$(CC) -c $(CFLAGS) -o build/main.o src/main.c
+	@$(CC) -g -o build/neovis build/main.o $(LDFLAGS)
 
-.PHONY: image-processing
-image-processing:
-	mkdir -p build
-	$(CC) $(CFLAGS) $(OBJECTS) -o build/image-processing $(LDFLAGS)
+clean: neovis
+	@rm -r build
