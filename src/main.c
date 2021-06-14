@@ -4,6 +4,11 @@
 #include <string.h>
 #include <turbojpeg.h>
 
+#ifdef _WIN32
+#define strcasecmp stricmp
+#define strncasecmp strnicmp
+#endif
+
 // read an image to an uncompressed buffer
 int read_image(unsigned char *imBuf, char *imPath) {
   FILE *jpegFile = NULL;
