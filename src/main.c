@@ -40,11 +40,18 @@ unsigned int find_file_signture_id(char *filePath) {
   signture_len = fread(signture, 1, max_signture_len, file);
   fclose(file);
 
+  if (signture_len == 0) {
+    free(signture);
+    return NA;
+  }
+
   for (i = 0; i < NUM_SUPPORTED_FORMATS; i++) {
     if (memcmp(signture, SUPPORTED_FORAMTS[i].signture, signture_len) == 0) {
+      free(signture);
       return SUPPORTED_FORAMTS[i].id;
     }
   }
+  free(signture);
   return NA;
 }
 
