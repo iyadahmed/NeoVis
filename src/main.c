@@ -13,12 +13,18 @@ int main(int argc, char *argv[]) {
     return 1;
   }
   Image image;
-  read_image(&image, argv[1]);
-  write_image(&image, argv[2]);
+  if (read_image(&image, argv[1]) < 0) {
+    printf("Failed to read image file\n");
+    return 1;
+  }
+
+  if (write_image(&image, argv[2]) < 0) {
+    printf("Failed to write image file\n");
+    return 1;
+  }
 
   if (image.buf) {
     free(image.buf);
-    return 0;
   }
 
   return 0;
