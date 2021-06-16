@@ -1,6 +1,11 @@
 #ifndef COMMON_H
 #define COMMON_H
 
+#include <stddef.h>
+
+// goes to "bail" label
+#define BAIL() goto bail;
+
 typedef struct IntPair {
   int a, b;
 } IntPair;

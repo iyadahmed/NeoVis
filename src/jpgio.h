@@ -13,8 +13,6 @@
 #define DEFAULT_JPG_PIXELFORMAT TJPF_RGBX
 #define DEFAULT_JPG_FLAGS 0
 
-#define BAIL() goto bail;
-
 const IntPair TJPF_PIXELFORMAT_PAIRS[] = {
     {TJPF_RGB, PF_RGB},        {TJPF_BGR, PF_BGR},   {TJPF_RGBA, PF_RGBA},
     {TJPF_BGRA, PF_BGRA},      {TJPF_ARGB, PF_ARGB}, {TJPF_ABGR, PF_ABGR},
