@@ -47,8 +47,3 @@ void topological_sort(Graph *graph, int v, int visited[], Stack *stack)
     visited[v] = 1;
     // TODO
 }
-
-int main(void)
-{
-    return 0;
-}
