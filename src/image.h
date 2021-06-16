@@ -22,7 +22,7 @@ enum PixelFormat {
 };
 
 // Maps to pixel format to its size in bytes
-const int PF_SIZE[];
+extern const int PF_SIZE[];
 
 typedef struct {
   unsigned int width, height, nchannels;

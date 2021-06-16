@@ -17,8 +17,8 @@ typedef struct FileFormat {
   char *signature;
 } FileFormat;
 
-const FileFormat SUPPORTED_FORMATS[];
-const size_t NUM_SUPPORTED_FORMATS;
+extern const FileFormat SUPPORTED_FORMATS[];
+extern const size_t NUM_SUPPORTED_FORMATS;
 
 FileFormatID format_id_from_signature(char *file_path);
 FileFormatID format_id_from_extension(char *file_path);
