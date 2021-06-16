@@ -9,17 +9,17 @@
 
 int main(int argc, char *argv[]) {
   if (argc < 3) {
-    puts("Usage: neovis /path/to/input_image /path/to/output_image");
+    printf("Usage: neovis /path/to/input_image /path/to/output_image");
     return 1;
   }
   Image image;
   if (read_image(&image, argv[1]) < 0) {
-    puts("Failed to read image file");
+    printf("Failed to read image file\n");
     return 1;
   }
 
   if (write_image(&image, argv[2]) < 0) {
-    puts("Failed to write image file");
+    printf("Failed to write image file\n");
     return 1;
   }
 

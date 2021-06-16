@@ -1,9 +1,5 @@
-#ifndef NODES_H
-#define NODES_H
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
 typedef struct Node
 {
@@ -18,6 +14,12 @@ typedef struct Graph
     int adj[256][256];
 } Graph;
 
+void add_edge(Graph *graph, int u, int v, int w)
+{
+    Node node = {.v = v, .weight = w};
+    // TODO
+}
+
 typedef struct Stack
 {
     int top;
@@ -25,9 +27,23 @@ typedef struct Stack
     int *items;
 } Stack;
 
-int add_edge(Graph *graph, int u, int v, int w);
-static inline bool is_full(Stack *pt);
-static inline long push(Stack *pt, int x);
-void topological_sort(Graph *graph, int v, int visited[], Stack *stack);
+int is_full(Stack *pt)
+{
+    return pt->top == pt->maxsize - 1;
+}
 
-#endif
+void push(Stack *pt, int x)
+{
+    if (is_full(pt))
+    {
+        exit(EXIT_FAILURE);
+    }
+
+    pt->items[++pt->top] = x;
+}
+
+void topological_sort(Graph *graph, int v, int visited[], Stack *stack)
+{
+    visited[v] = 1;
+    // TODO
+}
