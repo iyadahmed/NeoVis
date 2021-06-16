@@ -1,6 +1,6 @@
-CC=gcc
-CFLAGS=-Wall -Wextra -Wpedantic
-LDFLAGS=-static -pthread -lturbojpeg
+CC= gcc
+CFLAGS= -O2 -std=c99 -Wconversion -Wall -Wextra -pedantic
+LDFLAGS= -static -pthread -lturbojpeg
 
 .PHONY: clean
 neovis:
