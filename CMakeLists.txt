@@ -1,0 +1,33 @@
+cmake_minimum_required(VERSION 3.2)
+
+project(NeoVis)
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/Modules")
+
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2 -std=c99 -Wconversion -Wall -Wextra -pedantic")
+
+set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR})
+
+set(NEOVIS_INSTALL_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
+set(NEOVIS_INSTALL_BIN_DIR ${PROJECT_SOURCE_DIR}/bin)
+set(NEOVIS_INSTALL_LIB_DIR ${PROJECT_SOURCE_DIR}/lib)
+
+set(IO_HEADERS_DIR ${PROJECT_SOURCE_DIR}/src/io)
+set(JPGIO_HEADERS_DIR ${PROJECT_SOURCE_DIR}/src/jpgio)
+set(IMAGE_HEADERS_DIR ${PROJECT_SOURCE_DIR}/src/image)
+set(COMMON_HEADERS_DIR ${PROJECT_SOURCE_DIR}/src/common)
+set(NODES_HEADERS_DIR ${PROJECT_SOURCE_DIR}/src/nodes)
+# set(TURBOJPEG_HEADERS_DIR C:\\libjpeg-turbo-gcc64\\include)
+
+include_directories(${NEOVIS_INSTALL_INCLUDE_DIR})
+
+include_directories(${IO_HEADERS_DIR})
+include_directories(${JPGIO_HEADERS_DIR})
+include_directories(${IMAGE_HEADERS_DIR})
+include_directories(${COMMON_HEADERS_DIR})
+include_directories(${NODES_HEADERS_DIR})
+
+
+
+add_subdirectory(src)
