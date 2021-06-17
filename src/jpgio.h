@@ -14,8 +14,8 @@
 #define DEFAULT_JPG_FLAGS 0
 
 extern const IntPair TJPF_PIXELFORMAT_PAIRS[];
-const size_t NUM_TJPF_PIXELFORMAT_PAIRS;
-const size_t NUM_TJCS_COLOSPACE_PAIRS;
+extern const size_t NUM_TJPF_PIXELFORMAT_PAIRS;
+extern const size_t NUM_TJCS_COLOSPACE_PAIRS;
 
 int read_jpg(Image *image, char *imgPath);
 int write_jpg(Image *image, char *img_path, int quality,
