@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.2)
-project(nodes C)
 
 set(SOURCE_FILES
     nodes.h
