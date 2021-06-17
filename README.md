@@ -1,7 +1,7 @@
 work in progress
 
 # How to compile:
-Run these commands in repo root dir:  
+simply `make` will call the equivalent of these commands   
 1- `mkdir build`  
 2- `cd build`  
 3- `cmake .. -G"Unix Makefiles"`  
