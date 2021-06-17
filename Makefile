@@ -4,7 +4,7 @@ LDFLAGS= -static -pthread -lturbojpeg
 
 neovis:
 	@mkdir -p build
-	@$(CC) src/*.c -o build/neovis $< $(LDFLAGS)
+	@$(CC) $(CFLAGS) src/*.c -o build/neovis $< $(LDFLAGS)
 
 .PHONY: clean
 clean: neovis
