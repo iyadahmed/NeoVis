@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.2)
-
 set(SOURCE_FILES
     io.h
     io.c
