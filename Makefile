@@ -2,9 +2,10 @@ CC= gcc
 CFLAGS= -O2 -std=c99 -Wconversion -Wall -Wextra -pedantic
 LDFLAGS= -static -pthread -lturbojpeg
 
-neovis:
+default:
 	@mkdir -p build
-	@$(CC) $(CFLAGS) src/*.c -o build/neovis $< $(LDFLAGS)
+	@cmake .. -G"Unix Makefiles" -S . -B build
+	@$(MAKE) -C build
 
 .PHONY: clean
 clean:
