@@ -7,7 +7,7 @@ add_subdirectory(common)
 add_subdirectory(nodes)
 set(SOURCE_FILES main.c)
 
-add_executable(NeoVis ${SOURCE_FILES})
+add_executable(neovis ${SOURCE_FILES})
 
-target_link_libraries(NeoVis io jpgio image common nodes)
-install(TARGETS NeoVis DESTINATION ${NEOVIS_INSTALL_BIN_DIR})
+target_link_libraries(neovis io jpgio image common nodes)
+install(TARGETS neovis DESTINATION ${NEOVIS_INSTALL_BIN_DIR})
