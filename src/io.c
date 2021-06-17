@@ -48,10 +48,10 @@ FileFormatID format_id_from_signature(char *file_path) {
 
 FileFormatID format_id_from_extension(char *file_path) {
   char *format = strrchr(file_path, '.');
-  format++; // skip '.' character
   if (!format) {
     return FF_UNKNOWN;
   }
+  format++; // skip '.' character
   if (!strcasecmp(format, "jpg")) {
     return FF_JPG;
   } else if (!strcasecmp(format, "ppm")) {
