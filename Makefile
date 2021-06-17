@@ -7,5 +7,5 @@ neovis:
 	@$(CC) $(CFLAGS) src/*.c -o build/neovis $< $(LDFLAGS)
 
 .PHONY: clean
-clean: neovis
+clean:
 	@rm -r build
