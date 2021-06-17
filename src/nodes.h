@@ -1,28 +1,26 @@
 #ifndef NODES_H
 #define NODES_H
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
-typedef struct Node
-{
-    int v;
-    int weight;
+
+typedef struct Node {
+  int v;
+  int weight;
 } Node;
 
-typedef struct Graph
-{
-    int n;
-    Node nodes[265];
-    int adj[256][256];
+typedef struct Graph {
+  int n;
+  Node nodes[265];
+  int adj[256][256];
 } Graph;
 
-typedef struct Stack
-{
-    int top;
-    int maxsize;
-    int *items;
+typedef struct Stack {
+  int top;
+  int maxsize;
+  int *items;
 } Stack;
 
 int add_edge(Graph *graph, int u, int v, int w);
