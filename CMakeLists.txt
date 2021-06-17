@@ -18,7 +18,6 @@ set(JPGIO_HEADERS_DIR ${PROJECT_SOURCE_DIR}/src/jpgio)
 set(IMAGE_HEADERS_DIR ${PROJECT_SOURCE_DIR}/src/image)
 set(COMMON_HEADERS_DIR ${PROJECT_SOURCE_DIR}/src/common)
 set(NODES_HEADERS_DIR ${PROJECT_SOURCE_DIR}/src/nodes)
-# set(TURBOJPEG_HEADERS_DIR C:\\libjpeg-turbo-gcc64\\include)
 
 include_directories(${NEOVIS_INSTALL_INCLUDE_DIR})
 
