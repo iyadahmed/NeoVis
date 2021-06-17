@@ -3,7 +3,6 @@
 #include "io.h"
 #include "jpgio.h"
 
-
 const FileFormat SUPPORTED_FORMATS[] = {
     {.id = FF_JPG, .signature = "\xff\xd8\xff"},
     {.id = FF_PPM, .signature = "\x50\x33\x0a"},
