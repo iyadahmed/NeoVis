@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.2)
-project(NeoVis-src)
 
 add_subdirectory(io)
 add_subdirectory(jpgio)
