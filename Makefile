@@ -2,11 +2,15 @@ CC= gcc
 CFLAGS= -O2 -std=c99 -Wconversion -Wall -Wextra -pedantic
 LDFLAGS= -static -pthread -lturbojpeg
 
-default:
-	@mkdir -p build
+makefiles: clean
 	@cmake .. -G"Unix Makefiles" -S . -B build
 	@$(MAKE) -C build
+
+ninja: clean
+	@cmake .. -GNinja -S . -B build
+	@ninja -C build
 
 .PHONY: clean
 clean:
 	@rm -r build
+	@mkdir build
