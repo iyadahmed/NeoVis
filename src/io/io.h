@@ -14,7 +14,7 @@ typedef enum FileFormatID { FF_JPG, FF_PPM, FF_UNKNOWN = -1 } FileFormatID;
 
 typedef struct FileFormat {
   enum FileFormatID id;
-  char *signature;
+  const char *signature;
 } FileFormat;
 
 extern const FileFormat SUPPORTED_FORMATS[];
