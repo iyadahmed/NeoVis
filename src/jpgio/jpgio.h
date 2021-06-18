@@ -1,8 +1,7 @@
 #ifndef JPGIO_H
 #define JPGIO_H
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <stddef.h>
 #include <turbojpeg.h>
 
 #include "common.h"
