@@ -8,4 +8,3 @@ set(SOURCE_FILES main.c)
 add_executable(neovis ${SOURCE_FILES})
 
 target_link_libraries(neovis io jpgio image common nodes)
-install(TARGETS neovis DESTINATION ${NEOVIS_INSTALL_BIN_DIR})

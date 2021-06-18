@@ -16,6 +16,3 @@ endif()
 add_library(jpgio SHARED STATIC ${SOURCE_FILES})
 
 target_link_libraries(jpgio ${_turbojpeg_target})
-
-install(TARGETS jpgio DESTINATION ${NEOVIS_INSTALL_LIB_DIR})
-install(FILES jpgio.h DESTINATION ${NEOVIS_INSTALL_INCLUDE_DIR})
