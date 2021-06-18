@@ -3,8 +3,7 @@ add_subdirectory(jpgio)
 add_subdirectory(image)
 add_subdirectory(common)
 add_subdirectory(nodes)
-set(SOURCE_FILES main.c)
 
-add_executable(neovis ${SOURCE_FILES})
+add_executable(neovis main.c)
 
 target_link_libraries(neovis io jpgio image common nodes)
