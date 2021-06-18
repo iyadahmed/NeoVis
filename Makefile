@@ -4,7 +4,7 @@ LDFLAGS= -static -pthread -lturbojpeg
 
 makefiles: clean
 	@cmake .. -G"Unix Makefiles" -S . -B build
-	@$(MAKE) -C build
+	@$(MAKE) --no-print-directory -C build
 
 ninja: clean
 	@cmake .. -GNinja -S . -B build
