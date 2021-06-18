@@ -12,5 +12,5 @@ ninja: clean
 
 .PHONY: clean
 clean:
-	@rm -r build
+	@rm -rf build
 	@mkdir build
