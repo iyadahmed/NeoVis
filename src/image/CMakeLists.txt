@@ -4,3 +4,4 @@ set(SOURCE_FILES
 )
 
 add_library(image SHARED STATIC ${SOURCE_FILES})
+target_include_directories(image PUBLIC .)

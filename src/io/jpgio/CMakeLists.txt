@@ -15,4 +15,5 @@ endif()
 
 add_library(jpgio SHARED STATIC ${SOURCE_FILES})
 
-target_link_libraries(jpgio ${_turbojpeg_target})
+target_link_libraries(jpgio common image ${_turbojpeg_target})
+target_include_directories(jpgio PUBLIC .)

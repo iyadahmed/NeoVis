@@ -4,3 +4,4 @@ set(SOURCE_FILES
 )
 
 add_library(common SHARED STATIC ${SOURCE_FILES})
+target_include_directories(common PUBLIC .)
