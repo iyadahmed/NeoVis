@@ -7,6 +7,7 @@
 int add_edge(Graph *graph, int u, int v, int w) {
   Node node = {.v = v, .weight = w};
   // TODO
+  return 0;
 }
 
 static inline bool is_full(Stack *pt) { return pt->top == pt->maxsize - 1; }
