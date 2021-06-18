@@ -3,5 +3,5 @@ set(SOURCE_FILES
     nodes.c
 )
 
-add_library(nodes SHARED STATIC ${SOURCE_FILES})
+add_library(nodes ${SOURCE_FILES})
 target_include_directories(nodes PUBLIC .)

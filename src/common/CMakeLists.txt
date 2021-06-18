@@ -3,5 +3,5 @@ set(SOURCE_FILES
     common.c
 )
 
-add_library(common SHARED STATIC ${SOURCE_FILES})
+add_library(common ${SOURCE_FILES})
 target_include_directories(common PUBLIC .)
