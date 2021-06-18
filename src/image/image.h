@@ -33,4 +33,4 @@ typedef struct {
 
 // TODO: convert between different formats and color spaces
 
-#endif
+#endif /* IMAGE_H */

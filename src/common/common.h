@@ -13,4 +13,4 @@ typedef struct IntPair {
 int get_int_pair(const IntPair *pairs, const size_t num_pairs, int value,
                  int default_value);
 
-#endif
+#endif /* COMMON_H */

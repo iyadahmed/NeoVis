@@ -25,4 +25,4 @@ FileFormatID format_id_from_extension(char *file_path);
 int read_image(Image *image, char *img_path);
 int write_image(Image *image, char *img_path);
 
-#endif
+#endif /* IO_H */
