@@ -1,7 +1,3 @@
-CC= gcc
-CFLAGS= -O2 -std=c99 -Wconversion -Wall -Wextra -pedantic
-LDFLAGS= -static -pthread -lturbojpeg
-
 makefiles: clean
 	@cmake .. -G"Unix Makefiles" -S . -B build
 	@$(MAKE) --no-print-directory -C build
