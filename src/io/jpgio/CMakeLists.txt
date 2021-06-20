@@ -4,16 +4,10 @@ set(SOURCE_FILES
 )
 
 find_package(TurboJPEG REQUIRED)
-message(STATUS "TURBOJPEG_LIBRARY=${TURBOJPEG_LIBRARY}")
-message(STATUS "TURBOJPEG_INCLUDE_DIR=${TURBOJPEG_INCLUDE_DIR}")
-
-if(TARGET turbojpeg-static)
-    set (_turbojpeg_target "turbojpeg-static")
-else()
-    set (_turbojpeg_target "turbojpeg")
-endif()
+message(STATUS "TURBOJPEG_LIBRARY=${TurboJPEG_LIBRARIES}")
+message(STATUS "TURBOJPEG_INCLUDE_DIR=${TurboJPEG_INCLUDE_DIRS}")
 
 add_library(jpgio ${SOURCE_FILES})
 
-target_link_libraries(jpgio common image ${_turbojpeg_target})
+target_link_libraries(jpgio common image ${TurboJPEG_LIBRARIES})
 target_include_directories(jpgio PUBLIC .)
