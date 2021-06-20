@@ -14,7 +14,7 @@ static inline bool is_full(Stack *pt) { return pt->top == pt->maxsize - 1; }
 
 static inline long push(Stack *pt, int x) {
   if (is_full(pt)) {
-    return __LONG_MAX__;
+    return LONG_MAX;
   }
 
   pt->items[++pt->top] = x;
