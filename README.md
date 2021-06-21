@@ -7,5 +7,8 @@ simply `make` will call the equivalent of these commands
 3- `cmake .. -G"Unix Makefiles"`  
 4- `make`  
 
+After compilation, binaries should be found in  
+build/bin
+
 # NeoVis
 Node  based image editor
