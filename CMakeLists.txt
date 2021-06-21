@@ -28,7 +28,6 @@ if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
     add_compile_options("-Winit-self")
     add_compile_options("-Wmissing-include-dirs")
     add_compile_options("-Wno-div-by-zero")
-    add_compile_options("-Wtype-limits")
 endif()
 
 add_subdirectory(src)
