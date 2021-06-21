@@ -14,14 +14,19 @@ struct NodeInput;
 struct NodeOutput;
 struct NodeList;
 
+typedef union NodeSocketValue {
+  float float_value;
+  int int_value;
+} NodeSocketValue;
+
 typedef struct NodeOutput {
   NodeSocketType type;
-  void *value;
+  NodeSocketValue value;
 } NodeOutput;
 
 typedef struct NodeInput {
   NodeSocketType type;
-  void *default_value;
+  NodeSocketValue default_value;
   struct NodeOutput *linked_output;
 } NodeInput;
 
@@ -43,7 +48,7 @@ typedef struct NodeList {
 } NodeList;
 
 Node *create_node(NodeType node_type);
-void *get_node_input_value(NodeInput *node_input);
+NodeSocketValue get_node_input_value(NodeInput *node_input);
 void set_node_output_value(NodeOutput *node_output, void *value);
 void set_node_output_value_float(NodeOutput *node_output, float value);
 // NodeGraph *create_node_graph(int max_num_vertices);

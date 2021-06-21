@@ -20,24 +20,15 @@ Node *create_node(NodeType node_type) {
   return node;
 }
 
-void *get_node_input_value(NodeInput *node_input) {
+NodeSocketValue get_node_input_value(NodeInput *node_input) {
   if (node_input->linked_output) {
     return node_input->linked_output->value;
   }
   return node_input->default_value;
 }
 
-void set_node_output_value(NodeOutput *node_output, void *value) {
-  if (node_output->value) {
-    free(node_output->value);
-  }
-  node_output->value = value;
-}
-
 void set_node_output_value_float(NodeOutput *node_output, float value) {
-  float *value_ptr = malloc(sizeof(float));
-  *value_ptr = value;
-  set_node_output_value(node_output, value_ptr);
+  node_output->value.float_value = value;
 }
 
 // NodeGraph *create_node_graph(int max_num_vertices) {
