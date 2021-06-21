@@ -6,8 +6,8 @@
 #include "jpgio.h"
 
 #if defined _WIN32 && !defined __MINGW32__
-#define strcasecmp stricmp
-#define strncasecmp strnicmp
+#define strcasecmp _stricmp
+#define strncasecmp _strnicmp
 #endif
 
 typedef enum FileFormatID { FF_JPG, FF_PPM, FF_UNKNOWN = -1 } FileFormatID;
