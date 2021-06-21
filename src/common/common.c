@@ -29,7 +29,7 @@ Stack *create_stack(int maxsize) {
   Stack *stack = malloc(sizeof(Stack));
   stack->maxsize = maxsize;
   stack->top = -1;
-  stack->items = malloc(maxsize * sizeof(int));
+  stack->items = malloc((size_t)maxsize * sizeof(int));
   return stack;
 }
 
