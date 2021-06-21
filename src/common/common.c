@@ -7,9 +7,9 @@
 // also sets the pointer to NULL
 #define FREE_STACK(stack_ptr)                                                  \
   {                                                                            \
-    free(stack->items);                                                        \
-    free(stack);                                                               \
-    stack = NULL;                                                              \
+    free(stack_ptr->items);                                                    \
+    free(stack_ptr);                                                           \
+    stack_ptr = NULL;                                                          \
   }
 
 int get_int_pair(const IntPair *pairs, const size_t num_pairs, int value,
@@ -25,11 +25,11 @@ int get_int_pair(const IntPair *pairs, const size_t num_pairs, int value,
   return default_value;
 }
 
-Stack *create_stack(int maxsize) {
+Stack *create_stack(size_t maxsize) {
   Stack *stack = malloc(sizeof(Stack));
   stack->maxsize = maxsize;
   stack->top = -1;
-  stack->items = malloc((size_t)maxsize * sizeof(int));
+  stack->items = malloc(maxsize * sizeof(int));
   return stack;
 }
 
