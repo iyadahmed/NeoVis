@@ -1,30 +1,52 @@
 #ifndef NODES_H
 #define NODES_H
 
+#include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef enum NodeType { NODE_ADD } NodeType;
+typedef enum NodeSocketType { SOCK_FLOAT } NodeSocketType;
+
+struct Node;
+struct NodeInput;
+struct NodeOutput;
+struct NodeList;
+
+typedef struct NodeOutput {
+  NodeSocketType type;
+  void *value;
+} NodeOutput;
+
+typedef struct NodeInput {
+  NodeSocketType type;
+  void *default_value;
+  struct NodeOutput *linked_output;
+} NodeInput;
+
 typedef struct Node {
-  int v;
-  int weight;
+  NodeType type;
+
+  int num_inputs, num_outputs;
+  struct NodeInput *inputs;
+  struct NodeOutput *outputs;
+
+  void *data;
 } Node;
 
-typedef struct Graph {
-  int n;
-  Node nodes[265];
-  int adj[256][256];
-} Graph;
+// Node graph
+typedef struct NodeList {
+  struct Node *node;
+  struct NodeList *adj;
+  struct NodeList *next;
+} NodeList;
 
-typedef struct Stack {
-  int top;
-  int maxsize;
-  int *items;
-} Stack;
-
-int add_edge(Graph *graph, int u, int v, int w);
-static inline bool is_full(Stack *pt);
-static inline long push(Stack *pt, int x);
-void topological_sort(Graph *graph, int v, int visited[], Stack *stack);
+Node *create_node(NodeType node_type);
+void *get_node_input_value(NodeInput *node_input);
+void set_node_output_value(NodeOutput *node_output, void *value);
+void set_node_output_value_float(NodeOutput *node_output, float value);
+// NodeGraph *create_node_graph(int max_num_vertices);
+// void add_graph_edge(NodeGraph *graph, Node *to, Node *from);
 
 #endif /* NODES_H */
