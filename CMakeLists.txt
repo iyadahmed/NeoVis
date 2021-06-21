@@ -28,6 +28,11 @@ if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
     add_compile_options("-Winit-self")
     add_compile_options("-Wmissing-include-dirs")
     add_compile_options("-Wno-div-by-zero")
+elseif(MSVC)
+    # Warning level 3
+    add_compile_options("/W3")
+    # Disable fopen warning etc.
+    add_compile_options("/wd4996")
 endif()
 
 add_subdirectory(src)
