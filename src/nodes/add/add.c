@@ -1,24 +1,29 @@
 #include "add.h"
 #include "../nodes.h"
 
-// This is likely to change
-NodeInput add_node_inputs[] = {{SOCK_FLOAT, {.float_value = 0.f}, NULL},
-                               {SOCK_FLOAT, {.float_value = 0.f}, NULL}};
+NodeSocketDef node_add_inputs[] = {
+    {SOCK_FLOAT, "Value"},
+    {SOCK_FLOAT, "Value"},
+    {SOCK_END, ""},
+};
 
-NodeOutput add_node_outputs[] = {{SOCK_FLOAT, {.float_value = 0.f}}};
-
-void setup_add_node(Node *node) {
-  node->inputs = add_node_inputs;
-  node->outputs = add_node_outputs;
-
-  node->inputs[0].default_value.float_value = 0.f;
-  node->inputs[1].default_value.float_value = 0.f;
-
-  node->data = NULL;
-}
+NodeSocketDef node_add_outputs[] = {
+    {SOCK_FLOAT, "Value"},
+    {SOCK_END, ""},
+};
 
 void exec_add_node(Node *node) {
-  float a = get_node_input_value(&(node->inputs[0])).float_value;
-  float b = get_node_input_value(&(node->inputs[1])).float_value;
-  set_node_output_value_float(&(node->outputs[0]), a + b);
+  float sum = 0.f;
+  for (size_t i = 0; i < node->num_inputs; i++) {
+    sum += *(float *)(node->inputs[i].value);
+  }
+  *(float *)(node->outputs[0].value) = sum;
+}
+
+void setup_add_node(Node *node) {
+  set_node_inputs(node, node_add_inputs);
+  set_node_outputs(node, node_add_outputs);
+
+  node->exec = &exec_add_node;
+  node->data = NULL;
 }

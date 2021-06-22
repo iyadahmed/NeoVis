@@ -6,52 +6,76 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef enum NodeType { NODE_ADD } NodeType;
-typedef enum NodeSocketType { SOCK_FLOAT } NodeSocketType;
+#define FREE_NODE(node_ptr)                                                    \
+  {                                                                            \
+    free_node(node_ptr);                                                       \
+    node_ptr = NULL;                                                           \
+  }
+
+typedef enum NodeType {
+  NODE_ADD,
+} NodeType;
+
+typedef enum NodeSocketType {
+  SOCK_IN,
+  SOCK_OUT,
+} NodeSocketType;
+
+typedef enum NodeSocketValueType {
+  SOCK_FLOAT,
+  // Special socket type to signify end of socket list
+  SOCK_END = -1,
+} NodeSocketValueType;
+
+extern const size_t NODE_SOCKET_VALUE_SIZE[];
 
 struct Node;
 struct NodeInput;
 struct NodeOutput;
 struct NodeList;
 
-typedef union NodeSocketValue {
-  float float_value;
-  int int_value;
-} NodeSocketValue;
+typedef struct NodeSocketDef {
+  NodeSocketValueType type;
+  const char *name;
+} NodeSocketDef;
 
-typedef struct NodeOutput {
-  NodeSocketType type;
-  NodeSocketValue value;
-} NodeOutput;
-
-typedef struct NodeInput {
-  NodeSocketType type;
-  NodeSocketValue default_value;
-  struct NodeOutput *linked_output;
-} NodeInput;
+typedef struct NodeSocket {
+  NodeSocketValueType value_type;
+  NodeSocketType sock_type;
+  const char *name;
+  void *value;
+  /* Only used when a socket is an input */
+  struct NodeSocket *linked_output;
+  /* --- */
+} NodeSocket;
 
 typedef struct Node {
   NodeType type;
 
-  int num_inputs, num_outputs;
-  struct NodeInput *inputs;
-  struct NodeOutput *outputs;
+  size_t num_inputs, num_outputs;
+  struct NodeSocket *inputs;
+  struct NodeSocket *outputs;
+
+  void (*exec)(struct Node *node);
 
   void *data;
 } Node;
 
-// Node graph
-typedef struct NodeList {
+typedef struct NodeTree {
   struct Node *node;
-  struct NodeList *adj;
-  struct NodeList *next;
-} NodeList;
+  struct NodeTree *adj;
+  struct NodeTree *next;
+} NodeTree;
 
 Node *create_node(NodeType node_type);
-NodeSocketValue get_node_input_value(NodeInput *node_input);
-void set_node_output_value(NodeOutput *node_output, void *value);
-void set_node_output_value_float(NodeOutput *node_output, float value);
-// NodeGraph *create_node_graph(int max_num_vertices);
-// void add_graph_edge(NodeGraph *graph, Node *to, Node *from);
+void free_node(Node *node);
+
+NodeSocket *create_sockets_from_definition(NodeSocketDef *defintion,
+                                           NodeSocketType sock_type,
+                                           size_t *sock_count_out);
+int set_node_inputs(Node *node, NodeSocketDef *defintion);
+int set_node_outputs(Node *node, NodeSocketDef *defintion);
+
+void exec_node_tree(NodeTree *tree);
 
 #endif /* NODES_H */
